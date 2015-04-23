@@ -1,6 +1,7 @@
 .idea/*
 web/WEB-INF/classes/*
 web/WEB-INF/work/*
+mercome.iml
 
 Thumbs.db
 .DS_Store

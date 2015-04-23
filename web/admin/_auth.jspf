@@ -1,0 +1,29 @@
+<%@ page import="com.mercome.activity.domain.Admin" %>
+<%@ page import="com.mercome.activity.domain.Setting" %>
+<%@ page import="com.mercome.activity.service.GenericService" %>
+<%@ page import="com.mercome.activity.service.PlayService" %>
+<%@ page import="com.mercome.activity.util.EnvUtils" %>
+
+<%@ page import="org.apache.commons.lang.math.NumberUtils" %>
+
+<%
+	final long adminId = NumberUtils.toLong(String.valueOf(session.getAttribute("_admin_id")));
+
+	if (adminId == 0) {
+		response.sendRedirect(request.getContextPath() + "/admin/login.jsp");
+
+		return;
+	}
+
+	try {
+		Admin admin = EnvUtils.getEnv().getBean(GenericService.class).find(Admin.class, adminId);
+
+		request.setAttribute("_admin", admin);
+	} catch (Exception e) {
+		e.printStackTrace();
+
+		response.sendRedirect(request.getContextPath() + "/admin/logout.jsp");
+
+		return;
+	}
+%>

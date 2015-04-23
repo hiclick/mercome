@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+	<description></description>
+	<display-name>functions</display-name>
+	<tlib-version>1.0</tlib-version>
+	<short-name>func</short-name>
+	<uri></uri>
+
+
+	<function>
+		<name>age</name>
+		<function-class>com.mercome.activity.util.Functions</function-class>
+		<function-signature>java.lang.String age(long)</function-signature>
+	</function>
+
+	<function>
+		<name>encode</name>
+		<function-class>$java.util.Functions</function-class>
+		<function-signature>java.lang.String encode(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>domain</name>
+		<function-class>com.mercome.activity.util.Functions</function-class>
+		<function-signature>java.lang.String domain()</function-signature>
+	</function>
+
+	<function>
+		<name>href</name>
+		<function-class>com.mercome.activity.util.Functions</function-class>
+		<function-signature>java.lang.String href()</function-signature>
+	</function>
+
+	<function>
+		<name>httpclient</name>
+		<function-class>com.mercome.activity.util.Functions</function-class>
+		<function-signature>java.lang.String httpclient(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>root</name>
+		<function-class>com.mercome.activity.util.Functions</function-class>
+		<function-signature>java.lang.String root()</function-signature>
+	</function>
+
+	<function>
+		<name>site</name>
+		<function-class>com.mercome.activity.util.Functions</function-class>
+		<function-signature>java.lang.String site()</function-signature>
+	</function>
+
+	<function>
+		<name>stripHtml</name>
+		<function-class>com.mercome.activity.util.Functions</function-class>
+		<function-signature>java.lang.String stripHtml(java.lang.String)</function-signature>
+	</function>
+
+</taglib>

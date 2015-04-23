@@ -1,0 +1,8 @@
+<ul id="navbar">
+	<li><a href="<c:url value='/' />">首页</a></li>
+	<li><a href="<c:url value='/product-list.jsp' />?productCategoryId=<%= com.mercome.activity.util.EnvUtils.getEnv().getBean(com.mercome.activity.service.GenericService.class).list(com.mercome.activity.domain.ProductCategory.class, "limit 0, 1").get(0).getProductCategoryId() %>" class="product">产品中心</a></li>
+	<li><a href="<c:url value='/b2c.jsp' />">如何购买</a></li>
+	<li><a href="<c:url value='/proxy.jsp' />">品牌代理</a></li>
+	<li><a href="<c:url value='/article-list.jsp' />?articleCategoryId=<%= com.mercome.activity.util.EnvUtils.getEnv().getBean(com.mercome.activity.service.GenericService.class).list(com.mercome.activity.domain.ArticleCategory.class, "limit 0, 1").get(0).getArticleCategoryId() %>">最新活动</a></li>
+	<li><a href="<c:url value='/about.jsp' />">关于我们</a></li>
+</ul>

@@ -1,0 +1,32 @@
+<resin xmlns="http://caucho.com/ns/resin" xmlns:resin="http://caucho.com/ns/resin/core">
+
+	<log name="" level="info" path="stdout:" />
+
+	<cluster id="">
+		<server id="">
+			<http port="8090" />
+		</server>
+
+		<resin:import path="${resin.home}/conf/app-default.xml" />
+
+		<web-app-default>
+			<servlet servlet-name="directory" servlet-class="com.caucho.servlets.DirectoryServlet">
+				<init enable="true" />
+			</servlet>
+		</web-app-default>
+
+		<host id="" root-directory=".">
+			<!-- db -->
+			<database jndi-name="jdbc/mercome">
+				<driver type="com.mysql.jdbc.Driver">
+					<url>jdbc:mysql://localhost:3306/mercome</url>
+					<user>mercome</user>
+					<password>mercome</password>
+				</driver>
+			</database>
+
+			<web-app id="/" document-directory="E:\STUDiO\work\mercome.com\web" lazy-init="true" />
+		</host>
+	</cluster>
+
+</resin>

@@ -1,0 +1,31 @@
+<script type="text/javascript" src="<c:url value='/js/json2.js' />"></script>
+
+<script type="text/javascript" src="<c:url value='/js/jquery/jquery-1.3.2.min.js' />"></script>
+
+<script type="text/javascript" src="<c:url value='/js/jquery/plugin/jquery.form.js' />"></script>
+
+<script type="text/javascript" src="<c:url value='/js/jquery/plugin/validation/jquery.validate.min.js' />"></script>
+<script type="text/javascript" src="<c:url value='/js/jquery/plugin/validation/messages_cn.js' />"  charset="GBK"></script>
+
+<script type="text/javascript" src="<c:url value='/js/validate.js' />"></script>
+<script type="text/javascript" src="<c:url value='/js/additional-methods.js' />"></script>
+
+
+<%--<link rel="stylesheet" type="text/css" href="<c:url value='/js/jquery/plugin/colorbox/1.3.18/colorbox.css' />" />--%>
+<%--<script type="text/javascript" src="<c:url value='/js/jquery/plugin/colorbox/1.3.18/jquery.colorbox-min.js' />"></script>--%>
+
+<script type="text/javascript" src="<c:url value='/js/jquery/plugin/jquery.cycle.lite.js' />"></script>
+
+<script type="text/javascript" src="<c:url value='/js/jquery/plugin/jcarousellite_1.0.1.min.js' />"></script>
+
+<script type="text/javascript" src="<c:url value='/js/util.js' />"></script>
+<script type="text/javascript" src="<c:url value='/js/util.jquery.js' />"></script>
+
+<script type="text/javascript">
+$(function() {
+
+	// nav
+	$("#navbar a").eq(_nav_index).addClass("current");
+
+});
+</script>

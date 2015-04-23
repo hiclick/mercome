@@ -1,0 +1,11 @@
+<div id="footer">
+	<div class="item">
+		<div class="copyright">
+			<a href="#">苗蔻商城</a> | <a href="<c:url value='/about.jsp' />">关于我们</a> | Copyright 2014-2015 All rights reserved
+		</div>
+		<div class="blog">
+			<a href="#" class="weixin">&nbsp;</a>
+			<a href="#" class="weibo">&nbsp;</a>
+		</div>
+	</div>
+</div>

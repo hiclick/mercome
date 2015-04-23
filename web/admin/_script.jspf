@@ -1,0 +1,21 @@
+<%--<script type="text/javascript" src="<c:url value='/js/jquery/jquery-1.3.2.min.js' /> "></script>--%>
+<%--<script type="text/javascript" src="<c:url value='/js/extjs/3.4.1.1/adapter/jquery/ext-jquery-adapter.js' />"></script>--%>
+
+<link rel="stylesheet" type="text/css" href="<c:url value='/js/extjs/3.4.1.1/resources/css/ext-all.css' />" />
+<script type="text/javascript" src="<c:url value='/js/extjs/3.4.1.1/adapter/ext/ext-base.js' />"></script>
+<script type="text/javascript" src="<c:url value='/js/extjs/3.4.1.1/ext-all.js' />"></script>
+<script type="text/javascript" src="<c:url value='/js/extjs/3.4.1.1/src/locale/ext-lang-zh_CN.js' />"></script>
+
+<link rel="stylesheet" type="text/css" href="<c:url value='/js/extjs/3.4.1.1/examples/ux/css/ux-all.css' />" />
+<script type="text/javascript" src="<c:url value='/js/extjs/3.4.1.1/examples/ux/ux-all.js' />"></script>
+
+<script type="text/javascript" src="<c:url value='/js/extjs/plugin/miframe.js' />"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/admin.css" />
+<!--[if IE]><![if !IE]><![endif]-->
+<link rel="stylesheet" type="text/css" href="/css/ie-extjs.css" />
+<!--[if IE]><![endif]><![endif]-->
+
+<%--<script type="text/javascript" src="http://www.4what.cn/cn/example/extjs/js/util.extjs-1.1.js"></script>--%>
+<script type="text/javascript" src="http://www1.pconline.com.cn/api/libs/4what/util.extjs-1.1.js"></script>
+<script type="text/javascript" src="<c:url value='/js/admin.js' />"></script>

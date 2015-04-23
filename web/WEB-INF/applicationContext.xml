@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+>
+
+	<!-- import -->
+	<!--<import resource="passportContext.xml" />-->
+
+
+	<!-- ioc -->
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.mercome.activity.*" />
+
+
+	<!-- properties -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+	      p:fileEncoding="UTF-8"
+	>
+		<property name="locations">
+			<list>
+				<!--<value>file:/data/pc-config/passport.properties</value>-->
+
+				<value>classpath:memcached.properties</value>
+				<value>classpath:system.properties</value>
+
+				<!-- 生产环境 -->
+				<!--<value>classpath:memcached.p.properties</value>-->
+				<!--<value>classpath:system.p.properties</value>-->
+
+				<!-- 测试环境 -->
+				<!--<value>classpath:memcached.t.properties</value>-->
+				<!--<value>classpath:system.t.properties</value>-->
+
+				<!-- 开发环境 -->
+				<value>classpath:memcached.d.properties</value>
+				<value>classpath:system.d.properties</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- aop -->
+	<aop:aspectj-autoproxy />
+
+
+	<!-- ds -->
+	<jee:jndi-lookup id="dataSource" jndi-name="${sys.jndi.name}" />
+
+
+	<!-- JdbcTemplate -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="simpleJdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+		<constructor-arg type="javax.sql.DataSource" ref="dataSource" />
+	</bean>
+
+
+	<!-- tx -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:annotation-driven />
+
+	<tx:advice id="txAdvice">
+		<tx:attributes>
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice" pointcut="
+			execution(* com.mercome.activity.repository..*.*(..))
+			|| execution(* com.mercome.activity.service..*.*(..))
+		" />
+	</aop:config>
+
+
+	<!-- Memcached -->
+	<bean id="sockIOPool" class="com.danga.MemCached.SockIOPool" factory-method="getInstance" init-method="initialize" destroy-method="shutDown"
+	      p:servers="${memcached.servers}"
+	      p:initConn="${memcached.initConn}"
+	      p:minConn="${memcached.minConn}"
+	      p:maxConn="${memcached.maxConn}"
+	      p:maintSleep="${memcached.maintSleep}"
+	      p:nagle="${memcached.nagle}"
+	      p:socketTO="${memcached.socketTO}"
+	>
+		<!--<constructor-arg value="" />-->
+	</bean>
+
+	<bean id="memCachedClient" class="com.danga.MemCached.MemCachedClient">
+		<!--<constructor-arg value="" />-->
+	</bean>
+
+
+	<!-- CommonsHttpClient -->
+	<bean id="commonsHttpClientService" class="com.mercome.activity.service.CommonsHttpClientService"
+	      p:proxyHost="${sys.proxy.host}"
+	      p:proxyPort="${sys.proxy.port}"
+	/>
+
+
+	<!-- timertask -->
+	<task:annotation-driven />
+
+<!--
+	<task:scheduled-tasks scheduler="scheduledTasks">
+		<task:scheduled ref="voteService" method="clear" cron="${sys.vote.buffer.cron}" />
+	</task:scheduled-tasks>
+
+	<task:scheduler id="scheduledTasks" pool-size="10" />
+-->
+
+
+	<!-- config -->
+	<bean id="config" class="com.mercome.activity.Config"
+	      p:proxyHost="${sys.proxy.host}"
+	      p:proxyPort="${sys.proxy.port}"
+	>
+		<property name="map">
+			<map>
+				<!--<entry key="" value="" />-->
+			</map>
+		</property>
+	</bean>
+
+
+	<!-- id -->
+	<bean id="idGenerator" class="com.mercome.activity.repository.IdTableGenerator"
+	      p:idDataSource-ref="dataSource"
+	/>
+
+</beans>

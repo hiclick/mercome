@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GB2312" />
+<title></title>
+
+<script type="text/javascript" src="http://www1.pconline.com.cn/api/libs/jquery/jquery-1.3.2.min.js"></script>
+
+<script type="text/javascript" src="http://www1.pconline.com.cn/api/libs/jquery/plugin/jquery.cookie.js"></script>
+
+<script type="text/javascript" src="http://www1.pconline.com.cn/api/libs/jquery/plugin/jquery.form.js"></script>
+
+<script type="text/javascript" src="http://www1.pconline.com.cn/api/libs/jquery/plugin/validation/jquery.validate.min.js"></script>
+<script type="text/javascript" src="http://www1.pconline.com.cn/api/libs/jquery/plugin/validation/messages_cn.js"></script>
+
+<script type="text/javascript" src="http://www1.pconline.com.cn/api/libs/4what/util.jquery.js"></script>
+
+<script type="text/javascript" src="http://www1.pconline.com.cn/api/util/uploadimg/pc.uploadimg.js"></script>
+
+<style type="text/css">
+body * {
+display: block;
+font-size: 12px;
+margin: 5px 0 0 0;
+}
+img {
+height: 100px;
+}
+</style>
+
+<script type="text/javascript">
+// for FCKeditor
+var fckeditor = window.parent.InnerDialogLoaded();
+window.parent.SetOkButton(true);
+
+function Ok() {
+	fckeditor.FCK.InsertHtml('<img src="' + $("#uploadimg-url").val() + '" alt="" />');
+	return true;
+}
+
+
+// error
+PC.error = function(msg) {
+	var error = $("#uploadimg-error");
+	if (msg) {
+		error.show().html(msg);
+	} else {
+		error.hide();
+	}
+};
+
+
+$(function() {
+
+	// upload
+	$("#uploadimg-frm").resetForm().validate({
+		rules: {
+			"picture": {
+				required: true,
+				accept: "gif|jpg|png"
+			}
+		},
+		messages: {
+			"picture": {
+				accept: "图片格式不支持，请上传 gif、jpg、png 格式的图片"
+			}
+		},
+		submitHandler: function(form) {
+			PC.uploadImg.upload(form, {
+				callback: function(status, success) {
+					switch (status) {
+						case true:
+							PC.error();
+							success(function(data) {});
+							break;
+						case false:
+							PC.error("上传失败");
+							break;
+						default:
+							break;
+					}
+				}
+			});
+		}
+	});
+
+});
+</script>
+</head>
+
+<body>
+
+<form action="" method="post" enctype="multipart/form-data" id="uploadimg-frm">
+	<input type="file" name="picture" value="" />
+
+	<p id="uploadimg-uploading" style="display: none;">请稍候……</p>
+
+	<p id="uploadimg-error" style="display: none;"></p>
+
+	<input type="submit" name="" value="提交" id="uploadimg-submit" />
+
+	<p id="uploadimg-preview"></p>
+
+	<input type="hidden" name="url" value="" id="uploadimg-url" />
+</form>
+
+</body>
+</html>
